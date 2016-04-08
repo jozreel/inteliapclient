@@ -1,0 +1,118 @@
+﻿<!-- ko with: home -->
+<ajax-req id="eqpreq"></ajax-req>
+<!--<div class="jumbotron">
+    <h1>N2N</h1>
+    <p class="lead">ITCO Beta</p>
+    <p>coming soon</p>
+</div> -->
+<button onclick="change()">chnge</button>
+<div class="h100">
+    <div>
+        <neon-animated-pages selected="0" id="na"
+                             entry-animation="fade-in-animation"
+                             exit-animation="fade-out-animation">
+            <neon-animatable>
+                <div class="row">
+                    <paper-material>
+                        <div class="container">
+                            <p>All Equipment used by techs <paper-button class="green">add new</paper-button></p>
+
+                            <table id="tbl" class="table table-striped table-hover">
+                                <thead>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </paper-material>
+
+                </div>
+            </neon-animatable>
+            <neon-animatable>
+                <div class="col-md-6">
+                    <h2>Your information</h2>
+                    <p>This section shows how you can call ASP.NET Web API to get the user details.</p>
+                    <p data-bind="text: myHometown"></p>
+
+                    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=273732">Learn more &raquo;</a></p>
+                </div>
+
+                <div class="col-md-4">
+                    <h2>Getting started</h2>
+                    <p>
+                        ASP.NET Single Page Application (SPA) helps you build applications that include significant client-side interactions using HTML, CSS, and JavaScript.
+                        It's now easier than ever before to getting started writing highly interactive web applications.
+                    </p>
+                    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=273732">Learn more &raquo;</a></p>
+                </div>
+
+                <div class="col-md-4">
+                    <h2>Web Hosting</h2>
+                    <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+                </div>
+
+            </neon-animatable>
+        </neon-animated-pages>
+    </div>
+</div>
+
+    <!--  <div class="col-md-6">
+          <h2>Your information</h2>
+          <p>This section shows how you can call ASP.NET Web API to get the user details.</p>
+          <p data-bind="text: myHometown"></p>
+
+          <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=273732">Learn more &raquo;</a></p>
+      </div>
+
+      <div class="col-md-4">
+          <h2>Getting started</h2>
+          <p>
+              ASP.NET Single Page Application (SPA) helps you build applications that include significant client-side interactions using HTML, CSS, and JavaScript.
+              It's now easier than ever before to getting started writing highly interactive web applications.
+          </p>
+          <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=273732">Learn more &raquo;</a></p>
+      </div>
+
+      <div class="col-md-4">
+          <h2>Web Hosting</h2>
+          <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+          <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+      </div>
+        -->
+    <script>
+        var iaj = document.getElementById('eqpreq');
+        //iaj.method = 'GET';
+        console.log(iaj);
+        iaj.respfunc = function (doc) {
+
+            for (var it in doc) {
+                var tr = document.createElement('tr');
+
+                var td = document.createElement('td');
+                td.innerHTML = doc[it].EquipmentID;
+                var tdn = document.createElement('td');
+                tdn.innerHTML = doc[it].Name;
+                var tdd = document.createElement('td');
+                tdd.innerHTML = doc[it].EquipmentDescription;
+                var tda = document.createElement('td');
+                tda.innerHTML = '<paper-icon-button icon="remove" oclick="deleteEqp()"></paper-icon-button>';
+
+                tr.appendChild(td);
+                tr.appendChild(tdn);
+                tr.appendChild(tdd);
+                tr.appendChild(tda);
+                document.getElementById('tbl').querySelector('tbody').appendChild(tr);
+
+            }
+        }
+        iaj.dataurl = 'http://localhost:59727/api/equipments';
+
+        function change() {
+            document.getElementById('na').selected = 1;
+        }
+    </script>
+    <!-- /ko -->
